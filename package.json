@@ -31,11 +31,11 @@
   "devDependencies": {},
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Aryannagar1912/Airbnb-Project.git"
+    "url": "git+https://github.com/yogitha-gowda/wanderlust.git"
   },
-  "keywords": [],
   "bugs": {
-    "url": "https://github.com/Aryannagar1912/Airbnb-Project/issues"
+    "url": "https://github.com/yogitha-gowda/wanderlust/issues"
   },
-  "homepage": "https://github.com/Aryannagar1912/Airbnb-Project#readme"
+  "homepage": "https://github.com/yogitha-gowda/wanderlust#readme"
 }
+
