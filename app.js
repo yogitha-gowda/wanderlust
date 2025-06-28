@@ -28,6 +28,12 @@ app.use(express.static(path.join(__dirname, "public")));
 
 const dbUrl = process.env.ATLASDB_URL;
 
+mongoose.connect(dbUrl, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
+
+
 main().then(() => {
     console.log("connected to db")
 }).catch((err) => {
@@ -76,7 +82,7 @@ passport.deserializeUser(User.deserializeUser());
 app.use((req, res, next) => {
     res.locals.success = req.flash("success");
     res.locals.error = req.flash("error");
-    res.locals.currUser = req.user;
+    res.locals.currUser = req.session.userId;
     next();
 });
 
