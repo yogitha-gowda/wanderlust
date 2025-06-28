@@ -10,7 +10,16 @@
     <div class="card col-6 offset-3 show-card listing-card">
         <img src="<%= listing.image.url %>" class="card-img-top show-img" alt="listing_image">
         <div class="card-body">
-            <p class="card-text"><b>Owned by :</b> <i>@<%= listing.owner.username %></i></p>
+            <p class="card-text">
+                <b>Owned by :</b>
+                <i>
+                    <% if (listing.owner && listing.owner.username) { %>
+                        @<%= listing.owner.username %>
+                    <% } else { %>
+                        Anonymous
+                    <% } %>
+                </i>
+            </p>
             <p class="card-text"><b>Description :</b> <%= listing.description %></p>
             <p class="card-text"><b>Price :</b> ₹ <%= listing.price.toLocaleString("en-IN") %> / night</p>
             <p class="card-text"><b>Location :</b> <%= listing.location %>, <%= listing.country %>
@@ -19,7 +28,7 @@
         </div>
     </div>
 
-    <% if (currUser && listing.owner._id.equals(currUser._id)) { %>
+    <% if (currUser && listing.owner && listing.owner._id.equals(currUser._id)) { %>
     <div class="d-flex justify-content-center gap-3 mt-4">
         <a href="/listings/<%= listing._id %>/edit" class="btn btn-dark px-4">✏️ Edit</a>
         <form method="POST" action="/listings/<%= listing._id %>?_method=DELETE">
@@ -72,11 +81,17 @@
                 <div class="card-body mb-2 review-card">
                     <p class="starability-result card-text" data-rating="<%= review.rating %>"></p>
                     <div style="max-width: 80vw;">
-                        <h5 class="card-title">@<%= review.author.username %> :</h5>
+                        <h5 class="card-title">
+                            <% if (review.author && review.author.username) { %>
+                                @<%= review.author.username %> :
+                            <% } else { %>
+                                Anonymous :
+                            <% } %>
+                        </h5>
                         <p class="card-text mb-1 review-comment"><%= review.comment %></p>
                     </div>
                 </div>
-                <% if (currUser && review.author._id.equals(currUser._id)) { %> 
+                <% if (currUser && review.author && review.author._id.equals(currUser._id)) { %>
                 <form class="mb-1 review-del needs-validation" method="POST" action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE">
                     <button class="btn btn-sm btn-danger" aria-label="Delete Review">
                         <i class="fa-solid fa-trash"></i>
